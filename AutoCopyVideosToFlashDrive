@@ -1,0 +1,35 @@
+import os
+import shutil
+import glob
+
+def videolar_flash_bellege_kopyala():
+    flash_bellek_yolu = "E:/Tüm_Videolar"  # ← Flash bellek yolunu buraya girin
+    
+    
+    if not os.path.exists(flash_bellek_yolu):
+        os.makedirs(flash_bellek_yolu)
+    
+    
+    video_uzantilari = ['*.mp4', '*.avi', '*.mkv', '*.mov', '*.flv', '*.wmv']
+    
+ 
+    for uzanti in video_uzantilari:
+        videolar = glob.glob(os.path.expanduser("~") + '\\**\\' + uzanti, recursive=True)
+        
+        
+        for video in videolar:
+            try:
+                
+                video_adi = os.path.basename(video)
+                
+                
+                hedef_yol = os.path.join(flash_bellek_yolu, video_adi)
+                
+                
+                shutil.copy(video, hedef_yol)
+                print(f"Video kopyalandı: {video_adi}")
+            except Exception as e:
+                print(f"Bir hata oluştu: {e}")
+
+
+videolar_flash_bellege_kopyala()
